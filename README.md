@@ -1,25 +1,25 @@
+ PDF RAG Assistant
 
-
-Process of Rag:
--Text Chunks → Embeddings
-OllamaEmbeddings converts PDF text into vectors.
-Stored in ChromaDB (a vector database).
-
--Retrieval Phase
-When you ask a question, its embedding is compared with stored vectors.
-The closest-matching chunks (by cosine similarity) are retrieved.
-
--Generation Phase
-The LLM (llama3) reads the retrieved chunks to generate an answer.
-
+A Retrieval-Augmented Generation (RAG) Assistant for interacting with PDFs.  
+This app lets you upload PDFs, view them, and ask questions. It uses LangChain + HuggingFace (llama3) to answer queries by extracting relevant context from your document.  
 
 
  Features
-🔒 Fully local processing - no data leaves your machine
-📄 PDF processing with intelligent chunking
-🧠 Multi-query retrieval for better context understanding
-🎯 Advanced RAG implementation using LangChain
-🖥️ Clean Streamlit interface
+Upload and view PDFs 
+Extract text and create embeddings for semantic search
+Ask natural language questions** about the PDF  
+Context-aware answers from the document
+Lightweight Streamlit-based UI 
+
+
+ Tech Stack
+[Python 3.10+](https://www.python.org/)
+[Streamlit](https://streamlit.io/)
+[LangChain](https://www.langchain.com/)
+[Ollama](https://ollama.ai/) / OpenAI API / any LLM backend
+FAISS / ChromaDB for vector search
+
+
  
 
 
