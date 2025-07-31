@@ -11,7 +11,7 @@ load_dotenv()
 
 st.set_page_config(
     page_title="PDF RAG Assistant",
-    page_icon="📚",
+    page_icon="",
     layout="wide"
 )
 
@@ -59,21 +59,21 @@ def save_uploaded_file(uploaded_file):
         return None
 
 with st.sidebar:
-    st.title("📚 PDF RAG Settings")
+    st.title(" PDF RAG Settings")
     
-    uploaded_file = st.file_uploader("📂 Upload PDF", type=["pdf"])
+    uploaded_file = st.file_uploader(" Upload PDF", type=["pdf"])
     
     st.session_state.language = st.selectbox(
-        "🌐 Select Response Language",
+        " Select Response Language",
         ["English", "Hindi", "Spanish", "French", "German"],
         index=0
     )
     
-    if st.button("🗑️ Clear Chat History"):
+    if st.button("🗑 Clear Chat History"):
         st.session_state.messages = []
         st.rerun()
     
-    with st.expander("ℹ️ Help & Tips"):
+    with st.expander(" Help & Tips"):
         st.markdown("""
         - Upload a PDF to start. Note: Large PDFs may take time to load all pages.
         - Ask **direct questions** (e.g., "What is the main topic?").
@@ -86,7 +86,7 @@ with st.sidebar:
 col1, col2 = st.columns([1, 1], gap="medium")
 
 with col1:
-    st.header("📄 PDF Viewer")
+    st.header(" PDF Viewer")
     if st.session_state.current_pdf:
         with st.container(height=700):
             for i, img in enumerate(st.session_state.pdf_images):
@@ -96,7 +96,7 @@ with col1:
         st.info("Upload a PDF to view it here")
 
 with col2:
-    st.title("💬 PDF RAG Assistant")
+    st.title(" PDF RAG Assistant")
     
     if uploaded_file and uploaded_file.name != st.session_state.current_pdf:
         with st.spinner("Processing PDF..."):
@@ -108,7 +108,7 @@ with col2:
                     st.session_state.current_pdf = uploaded_file.name
                     st.session_state.messages.append({
                         "role": "system",
-                        "content": f"📄 Now analyzing: {uploaded_file.name}"
+                        "content": f" Now analyzing: {uploaded_file.name}"
                     })
                     st.rerun()
                 else:
@@ -121,7 +121,7 @@ with col2:
                 with st.chat_message(message["role"]):
                     st.markdown(message["content"]["answer"] if isinstance(message["content"], dict) else message["content"])
                     if isinstance(message["content"], dict):
-                        with st.expander("🔍 Confidence Details"):
+                        with st.expander(" Confidence Details"):
                             st.write(f"Confidence: {message['content']['confidence']}")
                             st.write(f"Error Risk: {message['content']['error_risk']}")
                             st.write("Supporting Context:")
@@ -135,7 +135,7 @@ with col2:
             with st.chat_message("user"):
                 st.markdown(prompt)
         
-        with st.spinner("🤔 Thinking..."):
+        with st.spinner(" Thinking..."):
             if platform.system() == "Emscripten":
                 async def get_response():
                     return await asyncio.get_event_loop().run_in_executor(
@@ -151,7 +151,7 @@ with col2:
                     st.error(response["error"])
                 else:
                     st.markdown(response["answer"])
-                    with st.expander("🔍 Confidence Details"):
+                    with st.expander(" Confidence Details"):
                         st.write(f"Confidence: {response['confidence']}")
                         st.write(f"Error Risk: {response['error_risk']}")
                         st.write("Supporting Context:")
